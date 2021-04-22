@@ -1,5 +1,7 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.domain.Item;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 
@@ -19,9 +21,16 @@ public class JpaMain {
 
         // 실제 코드가 들어가는 부분
         try {
-            // Order order = new Order();
-            // order.addOrderItem(new OrderItem());
+            Item item = new Item();
+            item.setName("new item");
 
+            Category category = new Category();
+            category.setName("new category");
+
+            category.getItems().add(item);
+
+            entityManager.persist(category);
+            entityManager.persist(item);
 
             transaction.commit();
         }
