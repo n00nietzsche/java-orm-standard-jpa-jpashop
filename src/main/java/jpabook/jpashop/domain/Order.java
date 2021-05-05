@@ -14,11 +14,11 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID") // DB의 관점에서 조인되는 컬럼
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate; // 스프링 부트 설치 시에는 기본 설정이 ORDER_DATE, order_date
@@ -26,7 +26,7 @@ public class Order {
     @Enumerated(EnumType.STRING) // EnumType.ORDINAL 안쓰도록 주의
     private OrderStatus status;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 

@@ -1,9 +1,6 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.domain.Category;
-import jpabook.jpashop.domain.Item;
-import jpabook.jpashop.domain.Order;
-import jpabook.jpashop.domain.OrderItem;
+import jpabook.jpashop.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,16 +18,18 @@ public class JpaMain {
 
         // 실제 코드가 들어가는 부분
         try {
-            Item item = new Item();
-            item.setName("new item");
+            Album album = new Album();
+            album.setArtist("김가수");
 
-            Category category = new Category();
-            category.setName("new category");
+            Book book = new Book();
+            book.setAuthor("김 글쓴이");
 
-            category.getItems().add(item);
+            Movie movie = new Movie();
+            movie.setActor("김 배우");
 
-            entityManager.persist(category);
-            entityManager.persist(item);
+            entityManager.persist(album);
+            entityManager.persist(book);
+            entityManager.persist(movie);
 
             transaction.commit();
         }
