@@ -1,13 +1,33 @@
 package jpabook.jpashop.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
 public class Address {
+
+    // 값 타입으로서 공통으로 적용되어야 할 속성을 적용 가능하다.
+    @Column(length = 10)
     private String city;
+    @Column(length = 20)
     private String street;
+    @Column(length = 5)
     private String zipcode;
+
+    // 값 타입의 관점에서 비즈니스에 의미 있는 메소드 작성 가능 / 응집도 상승
+    public String fullAddress() {
+        return getZipcode() + " "+ getCity() + "시 " + getStreet() + "로 ";
+    }
+
+    protected Address() {
+    }
+
+    public Address(String city, String street, String zipcode) {
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
 
     public String getCity() {
         return city;
